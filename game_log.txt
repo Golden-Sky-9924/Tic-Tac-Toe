@@ -1,0 +1,25 @@
+Current board state:
+      
+      
+      
+
+Current board state:
+X     
+      
+      
+
+Current board state:
+X     
+  O   
+      
+
+Current board state:
+X     
+  O   
+    Z 
+
+Current board state:
+X     
+  O   
+  X Z 
+
