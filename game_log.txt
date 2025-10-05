@@ -1,25 +1,39 @@
-Current board state:
-      
-      
-      
+=== Tic Tac Toe Log (Board 3x3) ===
 
 Current board state:
-X     
-      
-      
+- - - 
+- - - 
+- - - 
 
+Player X moved to (0, 0)
 Current board state:
-X     
-  O   
-      
+X - - 
+- - - 
+- - - 
 
+Computer made a move.
 Current board state:
-X     
-  O   
-    Z 
+X - - 
+O - - 
+- - - 
 
+Player X moved to (1, 1)
 Current board state:
-X     
-  O   
-  X Z 
+X - - 
+O X - 
+- - - 
 
+Computer made a move.
+Current board state:
+X O - 
+O X - 
+- - - 
+
+Player X moved to (2, 2)
+Current board state:
+X O - 
+O X - 
+- - X 
+
+
+>>> Player X wins! <<<
