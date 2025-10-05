@@ -1,22 +1,21 @@
-#include "tictactoe.h" // my custom header with all the function declarations
+#include "tictactoe.h" 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 // Sets up the game board - fills everything with spaces initially
 void initializeBoard(char **board, int n) {
-    int i, j;  // I prefer declaring these separately, old habit
+    int i, j;  
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
-            board[i][j] = ' '; // empty space means no move yet
+            board[i][j] = ' '; 
         }
     }
 }
 
 // Displays the board to player and saves to log file
 void printBoard(char **board, int n, FILE *logFile) {
-    int i, j, k; // declaring all loop vars at top - C89 style habits die hard
-    
+    int i, j, k;     
     // Show column numbers at the top
     printf("\n  ");
     for (i = 0; i < n; i++) {
@@ -32,7 +31,7 @@ void printBoard(char **board, int n, FILE *logFile) {
         }
         printf("\n");
         
-        // Add those horizontal lines between rows (makes it look nicer)
+        // Add those horizontal lines between rows
         if (i < n - 1) {
             printf("  ");
             for (k = 0; k < n; k++) {
@@ -44,13 +43,12 @@ void printBoard(char **board, int n, FILE *logFile) {
     printf("\n");
 
     // Write current state to log file if we have one
-    if (logFile != NULL) {  // being extra careful with null checks
+    if (logFile != NULL) { 
         fprintf(logFile, "Current board state:\n");
         for (i = 0; i < n; i++) {
             for (j = 0; j < n; j++) {
                 char symbol = board[i][j];
-                // Replace spaces with dashes in log for better readability
-                if (symbol == ' ') {
+                                if (symbol == ' ') {
                     fprintf(logFile, "- ");
                 } else {
                     fprintf(logFile, "%c ", symbol);
@@ -59,14 +57,14 @@ void printBoard(char **board, int n, FILE *logFile) {
             fprintf(logFile, "\n"); 
         }
         fprintf(logFile, "\n"); 
-        fflush(logFile); // make sure it gets written immediately
+        fflush(logFile); 
     }
 }
 
-// Check if someone won the game
+// Check if won the game
 int checkWin(char **board, int n, char player) {
     int i, j;
-    int hasWon = 0;  // using a flag variable for clarity
+    int hasWon = 0;  
     
     // Check all rows first
     for (i = 0; i < n && !hasWon; i++) {
@@ -92,7 +90,7 @@ int checkWin(char **board, int n, char player) {
         if (colWin) hasWon = 1;
     }
 
-    // Check main diagonal (top-left to bottom-right)
+    // Check main diagonal 
     if (!hasWon) {
         int diagWin = 1;
         for (i = 0; i < n; i++) {
@@ -104,7 +102,7 @@ int checkWin(char **board, int n, char player) {
         if (diagWin) hasWon = 1;
     }
 
-    // Check other diagonal (top-right to bottom-left)
+    // Check other diagonal
     if (!hasWon) {
         int antiDiagWin = 1;
         for (i = 0; i < n; i++) {
@@ -119,39 +117,39 @@ int checkWin(char **board, int n, char player) {
     return hasWon;
 }
 
-// See if the board is full (tie game)
+// See if the board is full
 int checkDraw(char **board, int n) {
     int i, j;
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
             if (board[i][j] == ' ') {
-                return 0; // found an empty spot, game can continue
+                return 0; 
             }
         }
     }
-    return 1; // no empty spots = draw
+    return 1; 
 }
 
-// Make sure the move is legal before allowing it
+
 int isValidMove(char **board, int row, int col, int n) {
-    // Check boundaries first
+ 
     if (row < 0 || row >= n || col < 0 || col >= n) {
-        return 0; // outside the board
+        return 0; 
     }
     
-    // Check if spot is already taken
+ 
     if (board[row][col] != ' ') {
-        return 0; // someone already played here
+        return 0; 
     }
     
-    return 1; // looks good to me!
+    return 1; 
 }
 
-// Computer makes a random move (not very smart but works)
+
 void computerMove(char **board, int n) {
     int row, col;
     
-    // Keep trying random spots until we find an empty one
+   
     
     do {
         row = rand() % n; 
@@ -159,5 +157,5 @@ void computerMove(char **board, int n) {
     } while (board[row][col] != ' '); 
     
     printf("Computer chooses: row %d, column %d\n", row, col);
-    board[row][col] = 'O'; // computer is always O
+    board[row][col] = 'O';
 }

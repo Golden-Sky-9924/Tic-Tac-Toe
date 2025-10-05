@@ -1,31 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "tictactoe.h"   // My own header file for all the helper stuff
+#include "tictactoe.h"   
 
-// -------------------------------------------------------
-// Main driver for Tic Tac Toe (supports 2 or 3 players)
-// -------------------------------------------------------
 int main() {
-    srand(time(NULL));  // Random seed for computer moves (note: time(0) also works)
-    
-    int n = 0;          // Board size, user decides later
+    srand(time(NULL));      
+    int n = 0;          // Board size
     char **board = NULL;
     FILE *logFile = NULL;
 
-    // -- Let’s ask the user for the board size --
+  
     while (1) {
         printf("Enter board size N (between 3 and 10): ");
         if (scanf("%d", &n) != 1) {
             printf("Oops! That's not a number. Try again.\n");
-            while (getchar() != '\n');  // clear input buffer
+            while (getchar() != '\n');  
             continue;
         }
         if (n >= 3 && n <= 10) break;
         printf("Invalid size! Please choose between 3 and 10.\n");
     }
 
-    // -- Allocate the board dynamically --
+    //  Allocate the board dynamically
     board = (char **)malloc(n * sizeof(char *));
     if (!board) {
         fprintf(stderr, "Memory allocation for board failed (rows)\n");
@@ -36,16 +32,15 @@ int main() {
         board[i] = (char *)malloc(n * sizeof(char));
         if (!board[i]) {
             fprintf(stderr, "Memory allocation failed for row %d\n", i);
-            // Free whatever was already allocated
+            // Free 
             for (int k = 0; k < i; k++) free(board[k]);
             free(board);
             return 1;
         }
     }
 
-    initializeBoard(board, n);  // set everything to blanks or whatever initializeBoard does
-
-    // -- Optional logging to a file --
+    initializeBoard(board, n);  
+    // ogging to a file 
     logFile = fopen("game_log.txt", "w");
     if (!logFile) {
         printf("Couldn't open 'game_log.txt' for writing... continuing without log.\n");
@@ -53,14 +48,14 @@ int main() {
         fprintf(logFile, "=== Tic Tac Toe Log (Board %dx%d) ===\n\n", n, n);
     }
 
-    // -- Players setup --
-    char players[3] = {'X', 'O', 'Z'};   // third player just for fun
+    // Players setup 
+    char players[3] = {'X', 'O', 'Z'};   // third player
     int gameMode = 0;
     int currentPlayer = 0;
     int gameOver = 0;
     int row, col;
 
-    // -- Choose game mode --
+    // game mode selection 
     printf("\nSelect Game Mode:\n");
     printf("1. Two Players\n2. User vs Computer\n3. Three Players\n");
 
@@ -79,12 +74,8 @@ int main() {
     }
 
     int totalPlayers = (gameMode == 3) ? 3 : 2;
-
-    // =======================================================
-    // Main Game Loop
-    // =======================================================
     while (!gameOver) {
-        printBoard(board, n, logFile);  // print (and optionally log) the board
+        printBoard(board, n, logFile);  // print the board
 
         if (gameMode == 2 && currentPlayer == 1) {
             // Computer's move
@@ -138,7 +129,7 @@ int main() {
         printf("\nGame log saved to game_log.txt\n");
     }
 
-    // Free memory (I tend to forget this sometimes)
+    // Free memory 
     for (int i = 0; i < n; i++) {
         free(board[i]);
     }
@@ -146,7 +137,7 @@ int main() {
 
     printf("All memory freed. Exiting...\n");
 
-    // Note: maybe add replay feature later?
+
     // printf("Wanna play again? (TODO)\n");
 
     return 0;

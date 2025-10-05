@@ -14,26 +14,26 @@ X - -
 Computer made a move.
 Current board state:
 X - - 
-O - - 
+- O - 
 - - - 
 
-Player X moved to (1, 1)
+Player X moved to (0, 1)
 Current board state:
-X - - 
-O X - 
+X X - 
+- O - 
 - - - 
 
 Computer made a move.
 Current board state:
-X O - 
-O X - 
-- - - 
+X X - 
+- O - 
+- - O 
 
-Player X moved to (2, 2)
+Player X moved to (0, 2)
 Current board state:
-X O - 
-O X - 
-- - X 
+X X X 
+- O - 
+- - O 
 
 
 >>> Player X wins! <<<
